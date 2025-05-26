@@ -31,12 +31,15 @@ class Patient extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
+    public function dataDiagnosa()
+{
+    return $this->hasMany(Diagnosis::class);
+}
+
     public function patientHealth()
 {
     return $this->hasMany(PatientHealth::class);
 }
-
-    // di model Patient.php
 
 public function dataKesehatanTerbaru()
 {

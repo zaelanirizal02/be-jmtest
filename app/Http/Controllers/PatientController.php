@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
+use App\Models\Diagnosis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -22,8 +23,7 @@ class PatientController extends Controller
     public function index()
 {
     //nampilkan data pasien beserta data kesehatan pasien terbaru
-    $pasien = Patient::with(['user', 'dataKesehatanTerbaru'])->latest()->get();
-
+    $pasien = Patient::with(['user', 'dataKesehatanTerbaru', 'dataDiagnosa'])->latest()->get();
 
     return response()->json([
         'pesan' => 'Data berhasil diambil',

@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientHealthController;
 use App\Http\Controllers\DiagnosisController;
+use App\Http\Controllers\MedicineController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -35,5 +36,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/pasien/{patientId}/diagnosis/{id}', [DiagnosisController::class, 'show']);
     Route::put('/pasien/{patientId}/diagnosis/{id}', [DiagnosisController::class, 'update']);
     Route::delete('/pasien/{patientId}/diagnosis/{id}', [DiagnosisController::class, 'destroy']);
+
+    // Route Obat
+    Route::get('/obat', [MedicineController::class, 'index']);
+    Route::post('/obat', [MedicineController::class, 'store']);
+    Route::get('/obat/{id}', [MedicineController::class, 'show']);
+    Route::put('/obat/{id}', [MedicineController::class, 'update']);
+    Route::delete('/obat/{id}', [MedicineController::class, 'destroy']);
+    Route::put('/obat/{id}/stok', [MedicineController::class, 'updateStock']);
 });
 
