@@ -20,13 +20,15 @@ class PatientController extends Controller
     }
 
     public function index()
-    {
-        $pasien = Patient::with('user')->latest()->get();
-        return response()->json([
-            'pesan' => 'Data berhasil diambil',
-            'data' => $pasien
-        ]);
-    }
+{
+    $pasien = Patient::with(['user', 'patientHealth'])->latest()->get();
+
+    return response()->json([
+        'pesan' => 'Data berhasil diambil',
+        'data' => $pasien
+    ]);
+}
+
 
     public function store(Request $request)
     {

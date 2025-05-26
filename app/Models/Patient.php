@@ -31,6 +31,11 @@ class Patient extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
+    public function patientHealth()
+{
+    return $this->hasMany(PatientHealth::class);
+}
+
     public function visits()
     {
         return $this->hasMany(Visit::class);
