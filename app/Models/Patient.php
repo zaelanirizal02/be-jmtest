@@ -36,6 +36,14 @@ class Patient extends Model
     return $this->hasMany(PatientHealth::class);
 }
 
+    // di model Patient.php
+
+public function dataKesehatanTerbaru()
+{
+    return $this->hasOne(PatientHealth::class)->latestOfMany();
+}
+
+
     public function visits()
     {
         return $this->hasMany(Visit::class);

@@ -21,8 +21,9 @@ class PatientController extends Controller
 
     public function index()
 {
-    //nampilkan data pasien beserta data kesehatan pasien
-    $pasien = Patient::with(['user', 'patientHealth'])->latest()->get();
+    //nampilkan data pasien beserta data kesehatan pasien terbaru
+    $pasien = Patient::with(['user', 'dataKesehatanTerbaru'])->latest()->get();
+
 
     return response()->json([
         'pesan' => 'Data berhasil diambil',
