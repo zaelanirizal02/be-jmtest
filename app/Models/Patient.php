@@ -40,6 +40,10 @@ class Patient extends Model
 {
     return $this->hasMany(PatientHealth::class);
 }
+    public function dataObat()
+{
+    return $this->hasMany(PatientMedicine::class);
+}
 
 public function dataKesehatanTerbaru()
 {

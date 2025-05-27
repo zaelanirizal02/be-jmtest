@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 use App\Models\Diagnosis;
+use App\Models\PatientMedicine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -29,7 +30,7 @@ class PatientController extends Controller
     public function index()
 {
     //nampilkan data pasien beserta data kesehatan pasien terbaru
-    $pasien = Patient::with(['user', 'dataKesehatanTerbaru', 'dataDiagnosa'])->latest()->get();
+    $pasien = Patient::with(['user', 'dataKesehatanTerbaru', 'dataDiagnosa', 'dataObat'])->latest()->get();
 
     return response()->json([
         'pesan' => 'Data berhasil diambil',
@@ -110,8 +111,8 @@ class PatientController extends Controller
             return $roleCheck;
         }
 
-        $pasien = Patient::with('user')->findOrFail($id);
-        return response()->json([
+    $pasien = Patient::with(['user', 'dataKesehatanTerbaru', 'dataDiagnosa', 'dataObat'])->findOrFail($id);
+                return response()->json([
             'pesan' => 'Data berhasil diambil',
             'data' => $pasien
         ]);
