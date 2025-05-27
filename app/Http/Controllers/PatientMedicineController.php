@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @group Patient Medicine
+ * Menampilkan daftar patient medicine
+ * Endpoint ini digunakan untuk mengambil semua data patient medicine.
+ */
 class PatientMedicineController extends Controller
 {
     private function checkApotekerRole()

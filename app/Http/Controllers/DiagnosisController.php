@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * @group Diagnosis
+ * Menampilkan daftar diagnosis
+ * Endpoint ini digunakan untuk mengambil semua data diagnosis.
+ */
 class DiagnosisController extends Controller
 {
     private function checkDokterRole()

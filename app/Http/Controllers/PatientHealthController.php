@@ -8,11 +8,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * @group Patient Health
+ * Menampilkan daftar patient health
+ * Endpoint ini digunakan untuk mengambil semua data patient health.
+ */
 class PatientHealthController extends Controller
 {
     private function checkPerawatRole()
     {
-        if (!Auth::check() || Auth::user()->role !== 'perawat') {
+       if (!Auth::check() || !in_array(Auth::user()->role, ['perawat', 'superadmin'])) {
             return response()->json([
                 'pesan' => 'Unauthorized. Anda tidak memiliki akses untuk melakukan tindakan ini.',
             ], 403);

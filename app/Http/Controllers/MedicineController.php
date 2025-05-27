@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * @group OBAT
+ * Endpoint ini digunakan untuk mengola data obat.
+ */
 class MedicineController extends Controller
 {
     private function checkApotekerRole()
@@ -117,15 +121,14 @@ class MedicineController extends Controller
         $medicine = Medicine::findOrFail($id);
 
         $validator = Validator::make($request->all(), [
-            'kode' => 'required|string|unique:medicines,kode,' . $id,
-            'nama' => 'required|string|max:255',
+            'kode' => 'sometimes|string|unique:medicines,kode,' . $id,
+            'nama' => 'sometimes|string|max:255',
             'deskripsi' => 'nullable|string',
-            'kategori' => 'required|string|max:255',
-            'satuan' => 'required|string|max:50',
-            'harga' => 'required|numeric|min:0',
-            'stok' => 'required|integer|min:0'
+            'kategori' => 'sometimes|string|max:255',
+            'satuan' => 'sometimes|string|max:50',
+            'harga' => 'sometimes|numeric|min:0',
+            'stok' => 'sometimes|integer|min:0'
         ], [
-            'required' => ':attribute wajib diisi',
             'string' => ':attribute harus berupa teks',
             'max' => ':attribute maksimal :max karakter',
             'unique' => ':attribute sudah terdaftar',
@@ -141,16 +144,21 @@ class MedicineController extends Controller
             ], 422);
         }
 
-        $medicine->update([
-            'kode' => $request->kode,
-            'nama' => $request->nama,
-            'deskripsi' => $request->deskripsi,
-            'kategori' => $request->kategori,
-            'satuan' => $request->satuan,
-            'harga' => $request->harga,
-            'stok' => $request->stok,
-            'updated_by' => Auth::id()
-        ]);
+        // Only update fields that are present in the request
+        $updateData = array_filter($request->only([
+            'kode',
+            'nama',
+            'deskripsi',
+            'kategori',
+            'satuan',
+            'harga',
+            'stok'
+        ]));
+
+        // Always add updated_by
+        $updateData['updated_by'] = Auth::id();
+
+        $medicine->update($updateData);
 
         return response()->json([
             'pesan' => 'Data obat berhasil diperbarui',

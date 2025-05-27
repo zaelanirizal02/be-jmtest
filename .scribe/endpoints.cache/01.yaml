@@ -120,7 +120,7 @@ endpoints:
         name: tanggal_lahir
         description: 'Must be a valid date.'
         required: true
-        example: '2025-05-27T07:47:49'
+        example: '2025-05-27T08:03:45'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -151,7 +151,7 @@ endpoints:
       nik: amniihfqcoynlazg
       jenis_kelamin: P
       tempat_lahir: hdtqtqxbajwbpilpmufin
-      tanggal_lahir: '2025-05-27T07:47:49'
+      tanggal_lahir: '2025-05-27T08:03:45'
       alamat: consequatur
       no_telepon: mqeopfuudtdsu
     fileParameters: []
@@ -280,7 +280,7 @@ endpoints:
         name: jenis_kelamin
         description: ''
         required: true
-        example: L
+        example: P
         type: string
         enumValues:
           - L
@@ -302,7 +302,7 @@ endpoints:
         name: tanggal_lahir
         description: 'Must be a valid date.'
         required: true
-        example: '2025-05-27T07:47:49'
+        example: '2025-05-27T08:03:45'
         type: string
         enumValues: []
         exampleWasSpecified: false
@@ -330,9 +330,9 @@ endpoints:
         custom: []
     cleanBodyParameters:
       nama: vmqeopfuudtdsufvyvddq
-      jenis_kelamin: L
+      jenis_kelamin: P
       tempat_lahir: amniihfqcoynlazghdtqt
-      tanggal_lahir: '2025-05-27T07:47:49'
+      tanggal_lahir: '2025-05-27T08:03:45'
       alamat: consequatur
       no_telepon: mqeopfuudtdsu
     fileParameters: []

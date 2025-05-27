@@ -72,8 +72,17 @@ class PatientController extends Controller
         }
 
         // Generate nomor RM
-        $latestPatient = Patient::latest()->first();
-        $noRM = $latestPatient ? sprintf('%06d', intval(substr($latestPatient->no_rm, -6)) + 1) : '000001';
+       // Ambil semua no_rm yang ada (termasuk yang di-soft delete)
+        $existingNoRM = Patient::withTrashed()->pluck('no_rm')->toArray();
+
+        // Cari nomor RM pertama yang belum digunakan
+        for ($i = 1; $i <= 999999; $i++) {
+            $formattedNoRM = str_pad($i, 6, '0', STR_PAD_LEFT);
+            if (!in_array($formattedNoRM, $existingNoRM)) {
+                $noRM = $formattedNoRM;
+                break;
+            }
+        }
 
         $pasien = Patient::create([
             'no_rm' => $noRM,

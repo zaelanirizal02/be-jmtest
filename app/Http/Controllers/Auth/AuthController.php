@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * @group AUTH
+ * Menampilkan daftar auth
+ */
 class AuthController extends Controller
 {
     public function register(Request $request)
