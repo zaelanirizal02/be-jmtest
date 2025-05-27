@@ -12,4 +12,4 @@ cara installasi dan menjalankannya
 -   php artisan serve
 
 -   [auth](menggunakan sanctum).
--   repo frontend nya ada di []
+-   repo frontend nya ada di [https://github.com/zaelanirizal02/fe-jmtest]
