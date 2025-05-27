@@ -13,5 +13,6 @@ cara installasi dan menjalankannya
 
 -   [auth](menggunakan sanctum).
 -   [apidocs](menggunakan scribe). untuk mengaktifkannya [php artisan scribe:generate]
+-   untuk mengimport seed super admin silahkan pakai [php artisan db:seed --class=SuperAdminSeeder]
 -   akses apidocs nya [localhost:8000/docs]
 -   repo frontend nya ada di [https://github.com/zaelanirizal02/fe-jmtest]
