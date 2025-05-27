@@ -1,4 +1,4 @@
-## Test JMT
+## Test JMT Rizal Zaelani
 
 aplikasi klinik:
 cara installasi dan menjalankannya
