@@ -105,11 +105,7 @@ class PatientController extends Controller
 
     public function show($id)
     {
-    // Check role
-        $roleCheck = $this->checkPendaftaranRole();
-        if ($roleCheck) {
-            return $roleCheck;
-        }
+
 
     $pasien = Patient::with(['user', 'dataKesehatanTerbaru', 'dataDiagnosa', 'dataObat'])->findOrFail($id);
                 return response()->json([
