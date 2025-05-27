@@ -11,7 +11,7 @@ class MedicineController extends Controller
 {
     private function checkApotekerRole()
     {
-        if (!Auth::check() || Auth::user()->role !== 'apoteker') {
+        if (!Auth::check() || !in_array(Auth::user()->role, ['apoteker', 'superadmin'])) {
             return response()->json([
                 'pesan' => 'Unauthorized. Anda tidak memiliki akses untuk melakukan tindakan ini.',
             ], 403);

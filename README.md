@@ -12,4 +12,6 @@ cara installasi dan menjalankannya
 -   php artisan serve
 
 -   [auth](menggunakan sanctum).
+-   [apidocs](menggunakan scribe). untuk mengaktifkannya [php artisan scribe:generate]
+-   akses apidocs nya [localhost:8000/docs]
 -   repo frontend nya ada di [https://github.com/zaelanirizal02/fe-jmtest]

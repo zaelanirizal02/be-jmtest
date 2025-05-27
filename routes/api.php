@@ -6,6 +6,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientHealthController;
 use App\Http\Controllers\DiagnosisController;
 use App\Http\Controllers\MedicineController;
+use App\Http\Controllers\PatientMedicineController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -15,8 +16,9 @@ Route::post('/login', [AuthController::class, 'login']);
 // Protected routes
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/me', [AuthController::class, 'me']);
 
-    // Route Pasien
+    // Route Pasien dan Daftar Pasien
     Route::get('/pasien', [PatientController::class, 'index']);
     Route::post('/pasien', [PatientController::class, 'store']);
     Route::get('/pasien/{id}', [PatientController::class, 'show']);
@@ -44,5 +46,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/obat/{id}', [MedicineController::class, 'update']);
     Route::delete('/obat/{id}', [MedicineController::class, 'destroy']);
     Route::put('/obat/{id}/stok', [MedicineController::class, 'updateStock']);
+
+    // Route Resep Obat Pasien
+    Route::get('/pasien/{patientId}/obat', [PatientMedicineController::class, 'index']);
+    Route::post('/pasien/{patientId}/obat', [PatientMedicineController::class, 'store']);
+    Route::get('/pasien/{patientId}/obat/{id}', [PatientMedicineController::class, 'show']);
+    Route::delete('/pasien/{patientId}/obat/{id}', [PatientMedicineController::class, 'destroy']);
 });
 

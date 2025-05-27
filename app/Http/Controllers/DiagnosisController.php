@@ -12,7 +12,7 @@ class DiagnosisController extends Controller
 {
     private function checkDokterRole()
     {
-        if (!Auth::check() || Auth::user()->role !== 'dokter') {
+         if (!Auth::check() || !in_Array(Auth::user()->role, ['dokter','superadmin'])) {
             return response()->json([
                 'pesan' => 'Unauthorized. Anda tidak memiliki akses untuk melakukan tindakan ini.',
             ], 403);

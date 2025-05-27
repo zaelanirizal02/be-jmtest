@@ -17,7 +17,7 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|string|in:pendaftaran,dokter,perawat,apoteker'
+            'role' => 'required|string|in:pendaftaran,dokter,perawat,apoteker,superadmin'
         ]);
 
         if ($validator->fails()) {
@@ -25,6 +25,17 @@ class AuthController extends Controller
                 'message' => 'Validation failed',
                 'errors' => $validator->errors()
             ], 422);
+        }
+
+        // Cek apakah request memiliki header Authorization
+        $user = auth('sanctum')->user();
+
+        // Hanya superadmin yang bisa membuat user superadmin baru
+        if ($request->role === 'superadmin' && (!$user || $user->role !== 'superadmin')) {
+            return response()->json([
+                'message' => 'Unauthorized. Hanya superadmin yang dapat membuat akun superadmin baru.',
+                'current_user' => $user ? $user->role : 'not logged in'
+            ], 403);
         }
 
         $user = User::create([
@@ -57,6 +68,11 @@ class AuthController extends Controller
 
         // Ambil user yang berhasil login
         $user = Auth::user();
+
+        // Hapus token lama jika ada
+        $user->tokens()->delete();
+
+        // Buat token baru
         $plainTextToken = $user->createToken('auth_token')->plainTextToken;
 
         //pisah token
@@ -66,7 +82,8 @@ class AuthController extends Controller
         return response()->json([
             'id'=> $id,
             'user' => $user,
-            'token' => $token
+            'token' => $token,
+            'token_type' => 'Bearer'
         ]);
     }
 
@@ -77,6 +94,15 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'Logout berhasil'
+        ]);
+    }
+
+    // Tambah method untuk cek status autentikasi
+    public function me(Request $request)
+    {
+        return response()->json([
+            'user' => $request->user(),
+            'is_authenticated' => auth('sanctum')->check()
         ]);
     }
 }

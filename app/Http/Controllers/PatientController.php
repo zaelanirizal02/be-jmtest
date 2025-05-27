@@ -8,11 +8,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * @group Pasien
+ * Menampilkan daftar pasien
+ * Endpoint ini digunakan untuk mengambil semua data pasien.
+ */
 class PatientController extends Controller
+
 {
     private function checkPendaftaranRole()
     {
-        if (!Auth::check() || Auth::user()->role !== 'pendaftaran') {
+        if (!Auth::check() || !in_Array(Auth::user()->role, ['pendaftaran','superadmin'])) {
             return response()->json([
                 'pesan' => 'Unauthorized. Anda tidak memiliki akses untuk melakukan tindakan ini.',
             ], 403);
